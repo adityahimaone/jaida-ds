@@ -38,7 +38,7 @@ export const Button = ({
     <button
       type="button"
       className={[
-        "storybook-button bg-blue-500 p-4 rounded-md",
+        "storybook-button bg-blue-500 px-4 py-1 rounded-md",
         `text-${size}`,
         mode,
       ].join(" ")}
