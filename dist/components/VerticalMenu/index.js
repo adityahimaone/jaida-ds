@@ -16,10 +16,9 @@ const Badge = ({ label, state, overrideClassName }) => {
             "text-white rounded-[5px] px-3 py-1 ml-6 text-xs",
         ].join(" "), children: label }));
 };
-export default function VerticalMenu({ lists, className }) {
-    const pathname = window.location.pathname;
+export default function VerticalMenu({ lists, className, pathname }) {
     return (_jsx("ul", { className: ["flex w-full flex-col", className].join(" "), children: lists.map((list) => {
-            const isActive = !!list.slug && pathname.startsWith(list.slug);
-            return (_jsxs("li", { className: "relative pl-7", children: [isActive && _jsx(ActiveIndicator, {}), _jsx("span", { className: "ml-7", children: list.link }), _jsxs("span", { className: "absolute inset-0 flex justify-between pointer-events-none", children: [list.icon && (_jsxs("span", { className: "relative flex-none ml-6 mr-4", children: [list.icon, !!list.hasNotification && (_jsx("span", { className: "w-[6px] h-[6px] bg-[#46D39A] rounded-full absolute bottom-[4px] right-0" }))] })), !!list.badge && (_jsx(Badge, { label: list.badge.label, state: list.badge.state, overrideClassName: list.badge.overrideClassName }))] }), !!list.child && list.child.length > 0 && (_jsx(VerticalMenu, { lists: list.child }))] }, list.id));
+            const isActive = !!list.slug && !!pathname && pathname.startsWith(list.slug);
+            return (_jsxs("li", { className: "relative pl-7", children: [isActive && _jsx(ActiveIndicator, {}), _jsx("span", { className: "ml-7", children: list.link }), _jsxs("span", { className: "absolute inset-0 flex justify-between pointer-events-none", children: [list.icon && (_jsxs("span", { className: "relative flex-none ml-6 mr-4", children: [list.icon, !!list.hasNotification && (_jsx("span", { className: "w-[6px] h-[6px] bg-[#46D39A] rounded-full absolute bottom-[4px] right-0" }))] })), !!list.badge && (_jsx(Badge, { label: list.badge.label, state: list.badge.state, overrideClassName: list.badge.overrideClassName }))] }), !!list.child && list.child.length > 0 && (_jsx(VerticalMenu, { pathname: pathname, lists: list.child }))] }, list.id));
         }) }));
 }

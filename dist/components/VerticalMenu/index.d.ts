@@ -16,6 +16,7 @@ type TList = {
 type Props = {
     className?: string;
     lists: TList[];
+    pathname?: string;
 };
-export default function VerticalMenu({ lists, className }: Props): import("react/jsx-runtime").JSX.Element;
+export default function VerticalMenu({ lists, className, pathname }: Props): import("react/jsx-runtime").JSX.Element;
 export {};

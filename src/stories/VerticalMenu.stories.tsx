@@ -1,6 +1,6 @@
 import React from "react";
 import "@/index.css";
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 import { withRouter } from "storybook-addon-react-router-v6";
 import { Link } from "react-router-dom";
 import { House, Compass, Cloud, ChatCircle } from "@phosphor-icons/react";
@@ -25,13 +25,14 @@ const meta: Meta = {
 } satisfies Meta<typeof VerticalMenu>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+// type Story = StoryObj<typeof meta>;
 
 // More on writing stories with args: https://storybook.js.org/docs/react/writing-stories/args
-export const Primary: any = () => {
+export const Primary: unknown = () => {
   return (
     <div>
       <VerticalMenu
+        pathname=""
         className="gap-y-6"
         lists={[
           {

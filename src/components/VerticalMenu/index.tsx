@@ -20,6 +20,7 @@ type TList = {
 type Props = {
   className?: string;
   lists: TList[];
+  pathname?: string;
 };
 
 type TBadge = {
@@ -90,13 +91,12 @@ const Badge = ({ label, state, overrideClassName }: TBadge) => {
   );
 };
 
-export default function VerticalMenu({ lists, className }: Props) {
-  const pathname = window.location.pathname;
-
+export default function VerticalMenu({ lists, className, pathname }: Props) {
   return (
     <ul className={["flex w-full flex-col", className].join(" ")}>
       {lists.map((list) => {
-        const isActive = !!list.slug && pathname.startsWith(list.slug);
+        const isActive =
+          !!list.slug && !!pathname && pathname.startsWith(list.slug);
 
         return (
           <li key={list.id} className="relative pl-7">
@@ -133,7 +133,7 @@ export default function VerticalMenu({ lists, className }: Props) {
             </span>
             {/* !! : for checking if the value is not null or undefined */}
             {!!list.child && list.child.length > 0 && (
-              <VerticalMenu lists={list.child} />
+              <VerticalMenu pathname={pathname} lists={list.child} />
             )}
             {/* </Link> */}
           </li>
