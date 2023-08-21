@@ -32,7 +32,7 @@ export const Primary: unknown = () => {
   return (
     <div>
       <VerticalMenu
-        pathname=""
+        pathname="/"
         className="gap-y-6"
         lists={[
           {

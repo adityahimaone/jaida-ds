@@ -95,25 +95,17 @@ export default function VerticalMenu({ lists, className, pathname }: Props) {
   return (
     <ul className={["flex w-full flex-col", className].join(" ")}>
       {lists.map((list) => {
-        const isActive =
-          !!list.slug && !!pathname && pathname.startsWith(list.slug);
-
+        let isActive = false;
+        if (list.slug && pathname) {
+          isActive =
+            pathname === list.slug ||
+            (pathname.startsWith(list.slug) &&
+              pathname.charAt(list.slug.length) === "/");
+        }
         return (
           <li key={list.id} className="relative pl-7">
-            {/* <Link
-              href={!!list.slug ? list.slug : "#"}
-              className={[
-                "",
-                isActive ? "text-primary" : "text-primary-gray",
-              ].join(" ")}
-            > */}
             {isActive && <ActiveIndicator />}
             <span className="ml-7">{list.link}</span>
-            {/* <span
-              className={["text-sm", isActive ? "font-bold" : ""].join(" ")}
-            >
-              {list.label}
-            </span> */}
             <span className="absolute inset-0 flex justify-between pointer-events-none">
               {list.icon && (
                 <span className="relative flex-none ml-6 mr-4">
@@ -135,7 +127,6 @@ export default function VerticalMenu({ lists, className, pathname }: Props) {
             {!!list.child && list.child.length > 0 && (
               <VerticalMenu pathname={pathname} lists={list.child} />
             )}
-            {/* </Link> */}
           </li>
         );
       })}
